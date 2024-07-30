@@ -1,0 +1,13 @@
+.diagram-container {
+  height: 100%;
+  width: 100%;
+}
+
+.exportData {
+  height: 500px;
+  overflow: auto;
+  margin: 20px 0 0 0;
+  border: 1px solid #000;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
