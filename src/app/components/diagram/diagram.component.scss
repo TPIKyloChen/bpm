@@ -11,3 +11,17 @@
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+
+.properties-panel-parent {
+  border-left: 1px solid #ccc;
+  overflow: auto;
+
+  &:empty {
+    display: none;
+  }
+
+  >.djs-properties-panel {
+    padding-bottom: 70px;
+    min-height: 100%;
+  }
+}

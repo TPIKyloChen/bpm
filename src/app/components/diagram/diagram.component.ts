@@ -25,6 +25,12 @@ import type { ImportDoneEvent, ImportXMLResult } from 'bpmn-js';
 import BpmnJS from 'bpmn-js/lib/Modeler';
 import { from, Observable, Subscription } from 'rxjs';
 
+import {
+  BpmnPropertiesPanelModule,
+  BpmnPropertiesProviderModule,
+} from 'bpmn-js-properties-panel';
+
+import BpmnModeler from 'bpmn-js/lib/Modeler';
 @Component({
   selector: 'app-diagram',
   standalone: true,
@@ -36,30 +42,49 @@ export class DiagramComponent
   implements AfterContentInit, OnChanges, OnDestroy, OnInit
 {
   @ViewChild('ref', { static: true }) private el!: ElementRef;
+  @ViewChild('propertiesPanel', { static: true })
+  private propertiesPanel!: ElementRef;
+
   @Input() public url?: string;
   @Output() private importDone: EventEmitter<ImportDoneEvent> =
     new EventEmitter();
-  private bpmnJS: BpmnJS = new BpmnJS();
+  // private bpmnJS: BpmnJS = new BpmnJS();
+  private bpmnModeler: BpmnModeler;
   xml = '';
 
   constructor(private http: HttpClient) {
-    this.bpmnJS.on<ImportDoneEvent>('import.done', ({ error }) => {
-      if (!error) {
-        this.bpmnJS.get<Canvas>('canvas').zoom('fit-viewport');
-        // this.sendBpmnData();
-      }
-    });
+    // this.bpmnJS.on<ImportDoneEvent>('import.done', ({ error }) => {
+    //   if (!error) {
+    //     this.bpmnJS.get<Canvas>('canvas').zoom('fit-viewport');
+    //     // this.sendBpmnData();
+    //   }
+    // });
   }
 
   sendBpmnData(): void {
-    this.bpmnJS.saveXML({ format: true }).then((result) => {
+    this.bpmnModeler.saveXML({ format: true }).then((result) => {
       this.xml = result.xml;
-      // console.log('BPMN XML:', this.xml);
     });
   }
 
   ngAfterContentInit(): void {
-    this.bpmnJS.attachTo(this.el.nativeElement);
+    this.bpmnModeler = new BpmnModeler({
+      container: this.el.nativeElement,
+      propertiesPanel: {
+        parent: this.propertiesPanel.nativeElement,
+      },
+      additionalModules: [
+        BpmnPropertiesPanelModule,
+        BpmnPropertiesProviderModule,
+      ],
+    });
+    this.bpmnModeler.on<ImportDoneEvent>('import.done', ({ error }) => {
+      if (!error) {
+        this.bpmnModeler.get<Canvas>('canvas').zoom('fit-viewport');
+        this.sendBpmnData();
+      }
+    });
+    this.bpmnModeler.attachTo(this.el.nativeElement);
   }
 
   ngOnInit(): void {
@@ -76,7 +101,7 @@ export class DiagramComponent
   }
 
   ngOnDestroy(): void {
-    this.bpmnJS.destroy();
+    this.bpmnModeler.destroy();
   }
 
   /**
@@ -112,6 +137,6 @@ export class DiagramComponent
    * @see https://github.com/bpmn-io/bpmn-js-callbacks-to-promises#importxml
    */
   private importDiagram(xml: string): Observable<ImportXMLResult> {
-    return from(this.bpmnJS.importXML(xml));
+    return from(this.bpmnModeler.importXML(xml));
   }
 }
