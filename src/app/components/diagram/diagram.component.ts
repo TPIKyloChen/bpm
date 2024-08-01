@@ -31,6 +31,7 @@ import {
 } from 'bpmn-js-properties-panel';
 
 import BpmnModeler from 'bpmn-js/lib/Modeler';
+import { DiagramService } from 'src/app/service/diagram.service';
 @Component({
   selector: 'app-diagram',
   standalone: true,
@@ -48,18 +49,13 @@ export class DiagramComponent
   @Input() public url?: string;
   @Output() private importDone: EventEmitter<ImportDoneEvent> =
     new EventEmitter();
-  // private bpmnJS: BpmnJS = new BpmnJS();
   private bpmnModeler: BpmnModeler;
   xml = '';
 
-  constructor(private http: HttpClient) {
-    // this.bpmnJS.on<ImportDoneEvent>('import.done', ({ error }) => {
-    //   if (!error) {
-    //     this.bpmnJS.get<Canvas>('canvas').zoom('fit-viewport');
-    //     // this.sendBpmnData();
-    //   }
-    // });
-  }
+  constructor(
+    private http: HttpClient,
+    private diagramService: DiagramService
+  ) {}
 
   sendBpmnData(): void {
     this.bpmnModeler.saveXML({ format: true }).then((result) => {
@@ -67,7 +63,9 @@ export class DiagramComponent
     });
   }
 
-  ngAfterContentInit(): void {
+  ngAfterContentInit(): void {}
+
+  ngOnInit(): void {
     this.bpmnModeler = new BpmnModeler({
       container: this.el.nativeElement,
       propertiesPanel: {
@@ -85,9 +83,12 @@ export class DiagramComponent
       }
     });
     this.bpmnModeler.attachTo(this.el.nativeElement);
-  }
 
-  ngOnInit(): void {
+    if (this.diagramService.diagram()) {
+      this.importDiagram(this.diagramService.diagram());
+      return;
+    }
+
     if (this.url) {
       this.loadUrl(this.url);
     }

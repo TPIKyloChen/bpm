@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DiagramComponent } from '../components/diagram/diagram.component';
+import { DiagramComponent } from '../../components/diagram/diagram.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
