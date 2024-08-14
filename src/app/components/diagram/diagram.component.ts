@@ -27,10 +27,19 @@ import { from, Observable, Subscription } from 'rxjs';
 import {
   BpmnPropertiesPanelModule,
   BpmnPropertiesProviderModule,
+  ZeebePropertiesProviderModule, // Camunda 8 provider
+  CamundaPlatformPropertiesProviderModule,
 } from 'bpmn-js-properties-panel';
+
+// Camunda 8 behaviors
+import ZeebeBehaviorsModule from 'camunda-bpmn-js-behaviors/lib/camunda-cloud';
+
+// Camunda 8 moddle extension
+import zeebeModdle from 'zeebe-bpmn-moddle/resources/zeebe.json';
 
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 import { DiagramService } from 'src/app/service/diagram.service';
+
 @Component({
   selector: 'app-diagram',
   standalone: true,
@@ -70,7 +79,12 @@ export class DiagramComponent implements AfterContentInit, OnDestroy, OnInit {
       additionalModules: [
         BpmnPropertiesPanelModule,
         BpmnPropertiesProviderModule,
+        ZeebePropertiesProviderModule,
+        ZeebeBehaviorsModule,
       ],
+      moddleExtensions: {
+        zeebe: zeebeModdle,
+      },
     });
     this.bpmnModeler.on<ImportDoneEvent>('import.done', ({ error }) => {
       if (!error) {
