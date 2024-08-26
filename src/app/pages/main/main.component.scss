@@ -1,4 +1,8 @@
-.diagram-box {
-  width: 200px;
-  border: solid 1px black;
+.wrap {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  justify-items: start;
 }

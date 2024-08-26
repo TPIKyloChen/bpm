@@ -1,19 +1,4 @@
-<div>
-  <button (click)="addDiagram()">Create Process</button>
-  <button (click)="showImportDialog.set(true)">Import Process</button>
+<div class="wrap">
+  <app-tabs [items]="items" style="width: 80vw"></app-tabs>
+  <router-outlet></router-outlet>
 </div>
-
-<div>
-  @if (showImportDialog()) {<input
-    (change)="handleFile($event)"
-    type="file"
-    id="input"
-  />}
-</div>
-
-@for (item of diagramsList; track $index) {
-<div class="diagram-box" (click)="loadDiagram(item)">
-  <div>{{ item.name }}</div>
-  <div>{{ item.modifyTime }}</div>
-</div>
-}
