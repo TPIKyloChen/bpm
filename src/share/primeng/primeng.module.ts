@@ -34,6 +34,9 @@ import { TreeModule } from 'primeng/tree';
 import { TreeTableModule } from 'primeng/treetable';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TabMenuModule } from 'primeng/tabmenu';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 const primengModules = [
   CommonModule,
@@ -70,6 +73,9 @@ const primengModules = [
   TreeTableModule,
   ProgressSpinnerModule,
   TabMenuModule,
+  InputGroupAddonModule,
+  InputGroupModule,
+  SplitButtonModule,
 ];
 
 @NgModule({
