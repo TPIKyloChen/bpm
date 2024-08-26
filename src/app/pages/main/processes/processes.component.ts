@@ -6,15 +6,17 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { PrimengModule } from 'src/share/primeng/primeng.module';
 import { MenuItem, MessageService } from 'primeng/api';
 import { single } from 'rxjs';
+import { DialogComponent } from '../../../components/dialog/dialog.component';
 
 @Component({
   selector: 'app-processes',
   standalone: true,
-  imports: [PrimengModule],
+  imports: [PrimengModule, DialogComponent],
   templateUrl: './processes.component.html',
   styleUrl: './processes.component.scss',
 })
 export class ProcessesComponent {
+  visible = false;
   items: MenuItem[];
   constructor(private diagramService: DiagramService) {
     this.items = [
@@ -64,11 +66,19 @@ export class ProcessesComponent {
   private _router = inject(Router);
 
   addDiagram() {
-    this.diagramsList.push({
-      name: 'new',
-      modifyTime: '4:00',
-      diagram: '',
-    });
+    this.visible = true;
+  }
+
+  isSubmitChange(visible: boolean) {
+    if (visible) {
+      console.log('Visible was closed. 確定要送出:', visible);
+      this.diagramsList.push({
+        name: 'new',
+        modifyTime: '4:00',
+        diagram: '',
+      });
+    }
+    this.visible = false;
   }
 
   handleFile(event) {

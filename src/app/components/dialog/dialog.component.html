@@ -1,0 +1,28 @@
+<p-dialog
+  header="Create a new business process model"
+  [modal]="true"
+  [(visible)]="visible"
+  class="dialog"
+  closable="false"
+>
+  <div class="subTitle">
+    You need to give a name for the new model and you may want to add a
+    description at the same time.
+  </div>
+  <app-input [labelName]="'Model name'" [id]="'modelName'"></app-input>
+  <app-input [labelName]="'Model Key'" [id]="'modelKey'"></app-input>
+  <app-textarea [labelName]="'Description'" [id]="'description'"></app-textarea>
+  <div class="buttonGroup">
+    <p-button
+      class="cancel"
+      label="Cancel"
+      severity="info"
+      (onClick)="submit(false)"
+    />
+    <p-button
+      label="Create new model"
+      severity="info"
+      (onClick)="submit(true)"
+    />
+  </div>
+</p-dialog>
