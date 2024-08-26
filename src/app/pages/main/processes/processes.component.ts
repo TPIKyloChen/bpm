@@ -53,11 +53,9 @@ export class ProcessesComponent {
 
   diagramsList: DiagramList[] = [
     { name: '1', modifyTime: '4:00', diagram: '' },
-    { name: '2', modifyTime: '1:00', diagram: '' },
+    { name: '2', modifyTime: '2:00', diagram: '' },
     { name: '1', modifyTime: '4:00', diagram: '' },
-    { name: '2', modifyTime: '1:00', diagram: '' },
-    { name: '1', modifyTime: '4:00', diagram: '' },
-    { name: '2', modifyTime: '1:00', diagram: '' },
+    { name: '2', modifyTime: '3:00', diagram: '' },
   ];
   showImportDialog = signal(false);
   currentSortName = 'Last Modified';

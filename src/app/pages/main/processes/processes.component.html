@@ -53,21 +53,29 @@
       process model:
     </div>
     <div>
-      <i class="pi pi-plus-circle"></i>
+      <i class="pi pi-plus-circle" (click)="addDiagram()"></i>
       Create a BPMN model using the BPMN Visual Editor.
     </div>
     <div>
-      <i><i class="pi pi-plus-circle"></i></i>
+      <i class="pi pi-plus-circle" (click)="upload.click()"></i>
       You can also import existing BPMN models.
     </div>
   </div>
   } @else {
   <div class="list">
     @for (item of diagramsList; track $index) {
-    <div class="diagram-box" (click)="loadDiagram(item)">
-      <div>{{ item.name }}</div>
-      <div>{{ item.modifyTime }}</div>
-    </div>
+    <p-card
+      [header]="'v' + item.name"
+      subheader="Card Subheader"
+      (click)="loadDiagram(item)"
+    >
+      <ng-template pTemplate="header">
+        <img alt="Card" src="../../../../assets/png/example.png" />
+      </ng-template>
+      <p>{{ item.name }}</p>
+      <p><i class="pi pi-user"></i></p>
+      <p><i class="pi pi-clock"></i>{{ item.modifyTime }}</p>
+    </p-card>
     }
   </div>
 
