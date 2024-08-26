@@ -1,4 +1,7 @@
-<div class="wrap">
-  <app-tabs [items]="items" style="width: inherit"></app-tabs>
-  <router-outlet style="width: inherit"></router-outlet>
+<div class="header">
+  <app-tabs [items]="items" class="sizeWith"></app-tabs>
+</div>
+
+<div class="sizeWith">
+  <router-outlet></router-outlet>
 </div>
