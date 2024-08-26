@@ -5,11 +5,12 @@ import { DiagramService } from 'src/app/service/diagram.service';
 import { DiagramList } from 'src/app/model/diagram';
 import { TabsComponent } from 'src/app/components/tabs/tabs.component';
 import { MenuItem } from 'primeng/api';
+import { PrimengModule } from 'src/share/primeng/primeng.module';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [TabsComponent, RouterOutlet],
+  imports: [TabsComponent, RouterOutlet, PrimengModule],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
 })

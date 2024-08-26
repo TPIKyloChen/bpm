@@ -1,4 +1,55 @@
-.diagram-box {
-  width: 200px;
-  border: solid 1px black;
+.header {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 10px 0;
+  span {
+    line-height: 40px;
+  }
+  .processButton{
+    text-align: end;
+    p-button{
+      margin: 1px;
+    }
+  }
 }
+
+.search {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 200px calc(100% - 200px);
+  .menu-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #00a2c7;
+    border-left: 4px solid #00a2c7;
+    padding-left: 10px;
+  }
+  .noDataInfo {
+    background-color: #ededed;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 22px;
+    padding: 20px;
+    > div:first-child{
+      margin-bottom: 40px;
+    }
+    > div:not(:first-child){
+      margin-bottom: 20px;
+    }
+  }
+  .list {
+    display:grid;
+    grid-template-columns: repeat(4, 25%);
+    .diagram-box {
+      margin: 15px;
+      border: solid 1px black;
+    }
+  }
+}
+

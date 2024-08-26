@@ -1,19 +1,69 @@
-<div>
-  <button (click)="addDiagram()">Create Process</button>
-  <button (click)="showImportDialog.set(true)">Import Process</button>
+<div class="header">
+  <span>Business Process Models</span>
+  <div class="processButton">
+    <p-button (click)="addDiagram()" size="small" severity="info"
+      >Create Process</p-button
+    >
+    <p-button (click)="showImportDialog.set(true)" size="small" severity="info"
+      >Import Process</p-button
+    >
+  </div>
 </div>
 
-<div>
+<div class="search">
+  <p-inputGroup>
+    <p-inputGroupAddon>
+      <i class="pi pi-search"></i>
+    </p-inputGroupAddon>
+    <input type="text" pInputText placeholder="Search" />
+  </p-inputGroup>
+
+  <p-splitButton
+    [label]="currentSortName"
+    [model]="items"
+    severity="secondary"
+    size="small"
+  ></p-splitButton>
+</div>
+
+<div class="content">
+  <div class="title">
+    <span class="menu-title">My processes</span>
+  </div>
+  @if (!diagramsList.length) {
+  <div class="noDataInfo">
+    <div>
+      It looks like you have not created any business process models yet. You
+      can design process models, user forms and then bundle them up into a
+      process app to share with any colleagues. The first step is to create a
+      process model:
+    </div>
+    <div>
+      <i class="pi pi-plus-circle"></i>
+      Create a BPMN model using the BPMN Visual Editor.
+    </div>
+    <div>
+      <i><i class="pi pi-plus-circle"></i></i>
+      You can also import existing BPMN models.
+    </div>
+  </div>
+  } @else {
+  <div class="list">
+    @for (item of diagramsList; track $index) {
+    <div class="diagram-box" (click)="loadDiagram(item)">
+      <div>{{ item.name }}</div>
+      <div>{{ item.modifyTime }}</div>
+    </div>
+    }
+  </div>
+
+  }
+</div>
+
+<!-- <div>
   @if (showImportDialog()) {<input
     (change)="handleFile($event)"
     type="file"
     id="input"
   />}
-</div>
-
-@for (item of diagramsList; track $index) {
-<div class="diagram-box" (click)="loadDiagram(item)">
-  <div>{{ item.name }}</div>
-  <div>{{ item.modifyTime }}</div>
-</div>
-}
+</div> -->

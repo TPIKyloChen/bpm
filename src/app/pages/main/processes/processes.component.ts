@@ -3,22 +3,62 @@ import { Router } from '@angular/router';
 import { DiagramList } from 'src/app/model/diagram';
 import { DiagramService } from 'src/app/service/diagram.service';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
+import { PrimengModule } from 'src/share/primeng/primeng.module';
+import { MenuItem, MessageService } from 'primeng/api';
+import { single } from 'rxjs';
 
 @Component({
   selector: 'app-processes',
   standalone: true,
-  imports: [DashboardComponent],
+  imports: [PrimengModule],
   templateUrl: './processes.component.html',
   styleUrl: './processes.component.scss',
 })
 export class ProcessesComponent {
-  constructor(private diagramService: DiagramService) {}
+  items: MenuItem[];
+  constructor(private diagramService: DiagramService) {
+    this.items = [
+      {
+        label: 'Last Modified',
+        items: [],
+        command: () => {
+          this.update('Last Modified');
+        },
+      },
+      {
+        label: 'Oldest',
+        items: [],
+        command: () => {
+          this.update('Oldest');
+        },
+      },
+      {
+        label: 'Name,A-Z',
+        items: [],
+        command: () => {
+          this.update('Name,A-Z');
+        },
+      },
+      {
+        label: 'Name,Z-A',
+        items: [],
+        command: () => {
+          this.update('Name,Z-A');
+        },
+      },
+    ];
+  }
 
   diagramsList: DiagramList[] = [
     { name: '1', modifyTime: '4:00', diagram: '' },
     { name: '2', modifyTime: '1:00', diagram: '' },
+    { name: '1', modifyTime: '4:00', diagram: '' },
+    { name: '2', modifyTime: '1:00', diagram: '' },
+    { name: '1', modifyTime: '4:00', diagram: '' },
+    { name: '2', modifyTime: '1:00', diagram: '' },
   ];
   showImportDialog = signal(false);
+  currentSortName = 'Last Modified';
   processes = signal('');
 
   private _router = inject(Router);
@@ -45,6 +85,14 @@ export class ProcessesComponent {
 
   loadDiagram(diagram: DiagramList) {
     this.diagramService.diagram.set(diagram.diagram);
-    this._router.navigate(['dashboard']);
+    this._router.navigate(['/dashboard']);
+  }
+
+  getSortName(event: MouseEvent) {
+    console.log(event);
+  }
+
+  update(name: string) {
+    this.currentSortName = name;
   }
 }
