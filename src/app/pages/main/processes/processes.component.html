@@ -4,7 +4,7 @@
     <p-button (click)="addDiagram()" size="small" severity="info"
       >Create Process</p-button
     >
-    <p-button (click)="upload.click()" size="small" severity="info"
+    <p-button (click)="uploadDiagram()" size="small" severity="info"
       >Import Process</p-button
     >
   </div>
@@ -13,16 +13,10 @@
   [visible]="visible"
   (isSubmitChange)="isSubmitChange($event)"
 ></app-dialog>
-
-<input
-  #upload
-  type="file"
-  name="file"
-  id="file"
-  multiple
-  hidden
-  (change)="handleFile($event)"
-/>
+<app-upload-dialog
+  [uploadVisible]="uploadVisible"
+  (isUploadSubmitChange)="isUploadSubmitChange($event)"
+></app-upload-dialog>
 
 <div class="search">
   <p-inputGroup>
@@ -57,7 +51,7 @@
       Create a BPMN model using the BPMN Visual Editor.
     </div>
     <div>
-      <i class="pi pi-plus-circle" (click)="upload.click()"></i>
+      <i class="pi pi-plus-circle" (click)="uploadDiagram()"></i>
       You can also import existing BPMN models.
     </div>
   </div>

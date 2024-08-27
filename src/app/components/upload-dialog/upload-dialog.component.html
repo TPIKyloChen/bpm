@@ -1,0 +1,32 @@
+<p-dialog
+  header="Create a new business process model"
+  [modal]="true"
+  [(visible)]="uploadVisible"
+  class="dialog"
+  closable="false"
+>
+  <div class="subTitle">
+    You need to give a name for the new model and you may want to add a
+    description at the same time.
+  </div>
+
+  <p-fileUpload
+    (onSelect)="onSelectedFiles($event)"
+    auto="true"
+    chooseLabel="選擇檔案"
+    accept=".xml, .bpmn20.xml"
+  >
+    <ng-template pTemplate="empty">
+      <p class="dropZone">Drop a .bpmn or .bpmn20.xml BPMN XML file</p>
+    </ng-template>
+  </p-fileUpload>
+
+  <div class="buttonGroup">
+    <p-button
+      class="cancel"
+      label="Cancel the upload"
+      severity="warning"
+      (onClick)="cancel(false)"
+    />
+  </div>
+</p-dialog>

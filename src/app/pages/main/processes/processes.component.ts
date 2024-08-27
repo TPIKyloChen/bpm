@@ -2,21 +2,21 @@ import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { DiagramList } from 'src/app/model/diagram';
 import { DiagramService } from 'src/app/service/diagram.service';
-import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { PrimengModule } from 'src/share/primeng/primeng.module';
 import { MenuItem, MessageService } from 'primeng/api';
-import { single } from 'rxjs';
 import { DialogComponent } from '../../../components/dialog/dialog.component';
+import { UploadDialogComponent } from '../../../components/upload-dialog/upload-dialog.component';
 
 @Component({
   selector: 'app-processes',
   standalone: true,
-  imports: [PrimengModule, DialogComponent],
+  imports: [PrimengModule, DialogComponent, UploadDialogComponent],
   templateUrl: './processes.component.html',
   styleUrl: './processes.component.scss',
 })
 export class ProcessesComponent {
   visible = false;
+  uploadVisible = false;
   items: MenuItem[];
   constructor(private diagramService: DiagramService) {
     this.items = [
@@ -78,17 +78,16 @@ export class ProcessesComponent {
     }
     this.visible = false;
   }
+  isUploadSubmitChange(visible: boolean) {
+    if (visible) {
+      this._router.navigate(['/dashboard']);
+    } else {
+      this.uploadVisible = false;
+    }
+  }
 
-  handleFile(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.readAsText(file);
-    reader.onload = () => {
-      this.diagramService.diagram.set(reader.result as string);
-      this.showImportDialog.set(false);
-      this._router.navigate(['dashboard']);
-    };
+  uploadDiagram() {
+    this.uploadVisible = true;
   }
 
   loadDiagram(diagram: DiagramList) {
