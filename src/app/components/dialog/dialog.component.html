@@ -1,16 +1,16 @@
 <p-dialog
-  header="Create a new business process model"
+  [header]="titleName"
   [modal]="true"
   [(visible)]="visible"
   class="dialog"
   closable="false"
 >
   <div class="subTitle">
-    You need to give a name for the new model and you may want to add a
-    description at the same time.
+    You need to give a name for the new {{ type | lowercase }} and you may want
+    to add a description at the same time.
   </div>
-  <app-input [labelName]="'Model name'" [id]="'modelName'"></app-input>
-  <app-input [labelName]="'Model Key'" [id]="'modelKey'"></app-input>
+  <app-input [labelName]="type + ' name'" [id]="type + ' name'"></app-input>
+  <app-input [labelName]="type + ' Key'" [id]="type + ' Key'"></app-input>
   <app-textarea [labelName]="'Description'" [id]="'description'"></app-textarea>
   <div class="buttonGroup">
     <p-button

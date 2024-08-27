@@ -12,7 +12,10 @@ import { TextareaComponent } from '../textarea/textarea.component';
 })
 export class DialogComponent {
   @Input() visible: boolean = false;
-  @Output() isSubmitChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() titleName = '';
+  @Input() type: 'Form' | 'Model';
+  @Output()
+  isSubmitChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   handleClose() {
     console.log('Dialog closed');
   }

@@ -11,6 +11,8 @@
 </div>
 <app-dialog
   [visible]="visible"
+  [titleName]="'Create a new business process model'"
+  [type]="'Model'"
   (isSubmitChange)="isSubmitChange($event)"
 ></app-dialog>
 <app-upload-dialog
