@@ -6,6 +6,7 @@ import { ProcessesComponent } from './pages/main/processes/processes.component';
 import { DecisionTablesComponent } from './pages/main/decision-tables/decision-tables.component';
 import { MainAppsComponent } from './pages/main/main-apps/main-apps.component';
 import { MainFormsComponent } from './pages/main/main-forms/main-forms.component';
+import { BpmnFormComponent } from './components/bpmn-form/bpmn-form.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'processes' },
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+  },
+  {
+    path: 'bpmn-form',
+    component: BpmnFormComponent,
   },
 
   {
