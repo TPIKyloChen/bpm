@@ -18,7 +18,7 @@ export class ProcessesComponent {
   visible = false;
   uploadVisible = false;
   items: MenuItem[];
-  constructor(private diagramService: DiagramService) {
+  constructor(private diagramService: DiagramService, private router: Router) {
     this.items = [
       {
         label: 'Last Modified',
@@ -61,8 +61,6 @@ export class ProcessesComponent {
   currentSortName = 'Last Modified';
   processes = signal('');
 
-  private _router = inject(Router);
-
   addDiagram() {
     this.visible = true;
   }
@@ -80,7 +78,7 @@ export class ProcessesComponent {
   }
   isUploadSubmitChange(visible: boolean) {
     if (visible) {
-      this._router.navigate(['/dashboard']);
+      this.router.navigate(['/dashboard']);
     } else {
       this.uploadVisible = false;
     }
@@ -92,7 +90,7 @@ export class ProcessesComponent {
 
   loadDiagram(diagram: DiagramList) {
     this.diagramService.diagram.set(diagram.diagram);
-    this._router.navigate(['/dashboard']);
+    this.router.navigate(['/dashboard']);
   }
 
   getSortName(event: MouseEvent) {

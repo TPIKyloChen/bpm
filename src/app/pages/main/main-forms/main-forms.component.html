@@ -1,1 +1,62 @@
-<p>main-forms works!</p>
+<div class="header">
+  <span>Forms</span>
+  <div class="processButton">
+    <p-button (click)="addDiagram()" size="small" severity="info"
+      >Create Process</p-button
+    >
+  </div>
+</div>
+
+<app-dialog
+  [visible]="formVisible"
+  (isSubmitChange)="isSubmitChange($event)"
+></app-dialog>
+
+<div class="search">
+  <p-inputGroup>
+    <p-inputGroupAddon>
+      <i class="pi pi-search"></i>
+    </p-inputGroupAddon>
+    <input type="text" pInputText placeholder="Search" />
+  </p-inputGroup>
+
+  <p-splitButton
+    [label]="currentSortName"
+    [model]="items"
+    severity="secondary"
+    size="small"
+  ></p-splitButton>
+</div>
+
+<div class="content">
+  <div class="title">
+    <span class="menu-title">My processes</span>
+  </div>
+  @if (!diagramButtonList.length) {
+  <div class="noDataInfo">
+    <div>you have no reusable forms. To add one, click Create Form</div>
+    <div>
+      <i class="pi pi-plus-circle" (click)="addDiagram()"></i>
+      Create a new form now !
+    </div>
+  </div>
+  } @else {
+  <div class="list">
+    @for (item of diagramButtonList; track $index) {
+    <p-card
+      [header]="'v' + item.name"
+      subheader="Card Subheader"
+      (click)="loadDiagramForm(item)"
+    >
+      <ng-template pTemplate="header">
+        <img alt="Card" src="../../../../assets/png/bpmn-form.png" />
+      </ng-template>
+      <p>{{ item.name }}</p>
+      <p><i class="pi pi-user"></i></p>
+      <p><i class="pi pi-clock"></i>{{ item.modifyTime }}</p>
+    </p-card>
+    }
+  </div>
+
+  }
+</div>
