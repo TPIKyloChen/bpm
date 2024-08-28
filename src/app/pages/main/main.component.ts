@@ -18,9 +18,9 @@ export class MainComponent {
   constructor(private diagramService: DiagramService) {}
 
   items: MenuItem[] | undefined = [
-    { label: 'Processes', routerLink: '/processes' },
-    { label: 'Forms', routerLink: '/main-forms' },
-    { label: 'Decision Tables', routerLink: '/decisionTables' },
-    { label: 'Apps', routerLink: '/main-apps' },
+    { label: 'Processes', routerLink: 'processes' },
+    { label: 'Forms', routerLink: 'main-forms' },
+    { label: 'Decision Tables', routerLink: 'decisionTables' },
+    { label: 'Apps', routerLink: 'main-apps' },
   ];
 }
