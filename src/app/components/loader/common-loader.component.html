@@ -1,0 +1,7 @@
+@if (isDisplayLoader() && commonLoaderService.isLoading()) {
+{{ commonLoaderService.isLoading() }}
+<div class="load-background">
+  <p-progressSpinner ariaLabel="loading" />
+  <ng-content></ng-content>
+</div>
+}
