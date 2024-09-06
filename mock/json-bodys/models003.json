@@ -1,0 +1,37 @@
+
+{
+  "entry": {
+    "name": "string",
+    "id": "string",
+    "type": "string",
+    "content": [
+      "string"
+    ],
+    "version": "string",
+    "extensions": {
+      "additionalProp1": {},
+      "additionalProp2": {},
+      "additionalProp3": {}
+    },
+    "template": "string",
+    "category": "string",
+    "scope": "PROJECT",
+    "contentType": "string",
+    "projects": [
+      {
+        "name": "string",
+        "id": "string",
+        "version": "string",
+        "description": "string",
+        "lastModifiedDate": "2024-09-02T03:43:42.632Z",
+        "creationDate": "2024-09-02T03:43:42.632Z",
+        "createdBy": {},
+        "lastModifiedBy": {}
+      }
+    ],
+    "lastModifiedDate": "2024-09-02T03:43:42.632Z",
+    "creationDate": "2024-09-02T03:43:42.632Z",
+    "createdBy": {},
+    "lastModifiedBy": {}
+  }
+}
